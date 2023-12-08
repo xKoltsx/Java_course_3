@@ -3,10 +3,10 @@ package org.example.lab3;
 import java.util.Comparator;
 import java.util.List;
 
-public class ChainComparator implements Comparator<Shape> {
+public class SortComparator implements Comparator<Shape> {
     private List<Comparator<Shape>> comparators;
 
-    public ChainComparator(List<Comparator<Shape>> comparators) {
+    public SortComparator(List<Comparator<Shape>> comparators) {
         this.comparators = comparators;
     }
 

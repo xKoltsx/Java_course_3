@@ -6,23 +6,29 @@ import java.util.stream.Collectors;
 
 public class Demo {
     public static void main(String[] args) {
-        List<Shape> shape4 = new ArrayList<>();
 
+        List<Shape> shape4 = new ArrayList<>();
         Rectangle.RectangleBuilder rb1 = new Rectangle.RectangleBuilder();
         Rectangle.RectangleBuilder rb2 = new Rectangle.RectangleBuilder();
+        Rectangle.RectangleBuilder rb3 = new Rectangle.RectangleBuilder();
         Circle.CircleBuilder cb = new Circle.CircleBuilder();
 
 
 
         rb1.setShapeId(1);
-        rb1.setShapeName("Rectangle");
+        rb1.setShapeName("C");
         rb1.setLength(10);
         rb1.setWidth(20);
 
         rb2.setShapeId(3);
-        rb2.setShapeName("Box");
+        rb2.setShapeName("B");
         rb2.setLength(20);
         rb2.setWidth(40);
+
+        rb3.setShapeId(7);
+        rb3.setShapeName("A");
+        rb3.setLength(1);
+        rb3.setWidth(1);
 
         cb.setShapeId(2);
         cb.setShapeName("Circle");
@@ -33,20 +39,24 @@ public class Demo {
         Shape c1 = cb.build();
 
 
-
+        System.out.println("SortComparator");
         shape4.add(rb1.build());
         shape4.add(rb2.build());
+        shape4.add(rb3.build());
+        ShapeServiceInterface sh = new ShapeServiceWithStream(shape4);
+        System.out.println(sh.sortByName());
+
         Comparator<Shape> sortById = Comparator.comparing(Shape::getShapeId);
         Comparator<Shape> sortBytName = Comparator.comparing(Shape::getShapeName);
-        Comparator<Shape> sortByType = Comparator.comparing(Shape::getType);
+
         List<Comparator<Shape>> comparators = new ArrayList<>();
         comparators.add(sortById);
         comparators.add(sortBytName);
-        comparators.add(sortByType);
-        shape4.sort(new ChainComparator(comparators));
+        shape4.sort(new SortComparator(comparators));
         for (Shape p : shape4) {
             System.out.println(p);
         }
+        System.out.println();
 
         System.out.println("Comperable Treeset");
         TreeSet<Shape> treeSet = new TreeSet<>();

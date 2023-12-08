@@ -10,7 +10,7 @@ public class Demo {
         DBService service = new DBService(url,username,password);
 
         //change for creating or droping
-        service.createAllTables();
+        //service.createAllTables();
         //service.dropAllTables();
     }
 }
